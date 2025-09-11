@@ -1,0 +1,229 @@
+#1:  "Student Records Management System (SRMS) using Nested List"..
+
+students_records = []
+
+# 1. Add student.
+def add_student():
+    name = input("Enter student name: ")
+    roll_no = input("Enter student roll no: ")
+    course = input("Enter student course: ")
+    marks = int(input("Enter student marks: "))
+    students_records.append([name, roll_no, course, marks])
+    print("Student added successfully...")
+
+# 2. Display students.
+def display_records():
+    if students_records:
+        print("------------------")
+        print("Students Records")
+        print("------------------")
+        for student in students_records:
+            print(f"Name: {student[0]}")
+            print(f"Roll no: {student[1]}")
+            print(f"Course: {student[2]}")
+            print(f"Marks: {student[3]}")
+            print("-----------------------")
+    else:
+        print("No record found. Enter records first.")
+
+# 3. Search student from record.
+def search_student():
+    if students_records:
+        roll_no = input("Enter roll no of student: ")
+        for index, student in enumerate(students_records):
+            if roll_no == student[1]:  # roll no is at index 1
+                return student, index
+        return None, None
+    else:
+        print("Unable to search. Records empty.")
+        return None, None
+
+# 4. Update the marks using roll no.
+def update_marks():
+    student_found, index = search_student()
+    if student_found is not None:
+        print("Record Found")
+        print("---------------")
+        print(f"Name: {student_found[0]}")
+        print(f"Roll No: {student_found[1]}")
+        print(f"Course: {student_found[2]}")
+        print(f"Marks: {student_found[3]}")
+        update_marks = int(input("Enter marks to update: "))
+        students_records[index][3] = update_marks
+        print("Record Successfully updated...")
+    else:
+        print("Record not Found! Unable to update.")
+
+# 5. Delete record by roll no.
+def delete_record():
+    student_found, _ = search_student()
+    if student_found is not None:
+        students_records.remove(student_found)
+        print("Deleted Record successfully.")
+    else:
+        print("Record not found! Unable to delete.")
+
+# 6. Sort records by marks.
+def sort_records():
+    if students_records:
+        students_records.sort(key=lambda x: x[3], reverse=True)
+        print("Records sorted by Marks successfully....")
+    else:
+        print("Empty Records!!! Unable to Sort.")
+
+# Menu driven program...
+while True:
+    print("-----------------------------")
+    print("1. Add Student Record.")
+    print("2. Display Student Records.")
+    print("3. Search Student Record.")
+    print("4. Update Student Record.")
+    print("5. Delete Student Record.")
+    print("6. Sort Records")
+    print("7. Exit")
+    print("-----------------------------")
+
+    option = input("Enter your option: ")
+
+    if option == '1':
+        add_student()
+    elif option == '2':
+        display_records()
+    elif option == '3':
+        student_, _ = search_student()
+        if student_ is not None:
+            print("--- Student found ---")
+            print(f"Name: {student_[0]}")
+            print(f"Roll no: {student_[1]}")
+            print(f"Course: {student_[2]}")
+            print(f"Marks: {student_[3]}")
+        else:
+            print("Record not found !!!")
+    elif option == '4':
+        update_marks()
+    elif option == '5':
+        delete_record()
+    elif option == '6':
+        sort_records()
+    elif option == '7':
+        break
+    else:
+        print("Invalid Choice!!!")
+#Done
+
+
+
+#2  "Student Records Management System (SRMS) using List of Dictionaries"...
+
+# For storing students records
+# Each student record format: {"Name": ..., "Roll no": ..., "Course": ..., "Marks": ...}
+students_records = []
+
+# 1. Add student
+def add_student():
+    name = input("Enter student name: ")
+    roll_no = input("Enter student roll no: ")
+    course = input("Enter student course: ")
+    marks = int(input("Enter student marks: "))
+    student = {"Name": name, "Roll no": roll_no, "Course": course, "Marks": marks}
+    students_records.append(student)
+    print("Student added successfully...")
+
+# 2. Display students
+def display_records():
+    if students_records:
+        print("Students Records")
+        for student in students_records:
+            print(f"Name: {student['Name']}")
+            print(f"Roll no: {student['Roll no']}")
+            print(f"Course: {student['Course']}")
+            print(f"Marks: {student['Marks']}")
+            print("-----------------------")
+    else:
+        print("No record found. Enter records first.")
+
+# 3. Search student from record
+def search_student():
+    if students_records:
+        roll_no = input("Enter roll no of student: ")
+        for index, student in enumerate(students_records):
+            if roll_no == student["Roll no"]:
+                return student, index
+        return None, None
+    else:
+        print("Unable to search. Records empty.")
+        return None, None
+
+# 4. Update the marks using roll no
+def update_marks():
+    student_found, index = search_student()
+    if student_found is not None:
+        print("---------------")
+        print("Record Found")
+        print("---------------")
+        print(f"Name: {student_found['Name']}")
+        print(f"Roll No: {student_found['Roll no']}")
+        print(f"Course: {student_found['Course']}")
+        print(f"Marks: {student_found['Marks']}")
+        print("---------------")
+        update_marks = int(input("Enter marks to update: "))
+        students_records[index]["Marks"] = update_marks
+        print("Record Successfully updated...")
+    else:
+        print("Record not Found! Unable to update.")
+
+# 5. Delete record by roll no
+def delete_record():
+    student_found, _ = search_student()
+    if student_found is not None:
+        students_records.remove(student_found)
+        print("Deleted Record successfully.")
+    else:
+        print("Record not found! Unable to delete.")
+
+# 6. Sort records by marks
+def sort_records():
+    if students_records:
+        students_records.sort(key=lambda x: x["Marks"], reverse=True)
+        print("Records sorted by Marks successfully....")
+    else:
+        print("Empty Records!!! Unable to Sort.")
+
+# --- Menu-driven program ---
+while True:
+    print("-----------------------------")
+    print("1. Add Student Record.")
+    print("2. Display Student Records.")
+    print("3. Search Student Record.")
+    print("4. Update Student Record.")
+    print("5. Delete Student Record.")
+    print("6. Sort Records")
+    print("7. Exit")
+    print("-----------------------------")
+
+    option = input("Enter your option: ")
+
+    if option == '1':
+        add_student()
+    elif option == '2':
+        display_records()
+    elif option == '3':
+        student_, _ = search_student()
+        if student_ is not None:
+            print("--- Student found ---")
+            print(f"Name: {student_['Name']}")
+            print(f"Roll no: {student_['Roll no']}")
+            print(f"Course: {student_['Course']}")
+            print(f"Marks: {student_['Marks']}")
+        else:
+            print("Record not found !!!")
+    elif option == '4':
+        update_marks()
+    elif option == '5':
+        delete_record()
+    elif option == '6':
+        sort_records()
+    elif option == '7':
+        break
+    else:
+        print("Invalid Choice!!!")
