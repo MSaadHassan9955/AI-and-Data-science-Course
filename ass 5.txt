@@ -1,0 +1,172 @@
+
+Part 1: Encapsulation Practice Tasks: 
+Task 1: Bank Account 
+
+class BankAccount:
+    def __init__(self, acc, bal=0):
+        self.__acc = acc
+        self.__bal = bal
+
+    def deposit(self, amount):
+        self.__bal += amount
+        print("Deposited:", amount, "New Balance:", self.__bal)
+
+    def withdraw(self, amount):
+        if self.__bal >= amount:
+            self.__bal -= amount
+            print("Withdrew:", amount, "New Balance:", self.__bal)
+        else:
+            print("Not enough balance!")
+
+    def get_balance(self):
+        return self.__bal
+
+Task 2: Student Marks Validation
+
+class Student:
+    def __init__(self, name, roll, marks=0):
+        self.__name = name
+        self.__roll = roll
+        self.__marks = marks
+
+    def set_marks(self, m):
+        if 0 <= m <= 100:
+            self.__marks = m
+        else:
+            print("Marks must be between 0 and 100!")
+
+    def get_name(self):
+        return self.__name
+
+    def get_roll(self):
+        return self.__roll
+
+    def get_marks(self):
+        return self.__marks
+
+Task 3: Password Manager 
+
+
+class PasswordManager:
+    def __init__(self, username, password):
+        self.username = username
+        self.__password = password
+
+    def __check_username(self, name):   # Private Method
+        return self.username == name
+
+    def __check_password(self, input_pass):  # Private Method
+        return self.__password == input_pass
+
+    def set_password(self, old, new):
+         if self.__password == old:  
+            self.__password = new
+            print("Password Updated!")
+        else:
+            print("Old Password Incorrect!")
+
+
+Task 4: Employee Salary Protection 
+
+
+class Employee:
+    def __init__(self, name, salary):
+        self.__name = name
+        self.__salary = salary
+
+    def get_name(self):   # Getter
+        return self.__name
+
+    def set_salary(self, salary):   # Setter
+        if salary > 0:
+            self.__salary = salary
+        else:
+            print("Salary must be positive!")
+
+    def show_details(self): 
+        print("Name:", self.__name, "Salary:", self.__salary)
+
+
+Task 5: Shopping Cart
+
+class ShoppingCart:
+    def __init__(self):
+        self.__items = []   # Private List
+
+    def add_item(self, item):
+        if item not in self.__items:   # No duplicate items allowed
+            self.__items.append(item)
+        else:
+            print("Item already in cart!")
+
+    def remove_item(self, item):
+        if item in self.__items:
+            self.__items.remove(item)
+        else:
+            print("Item not found!")
+
+    def view_cart(self):
+        return self.__items   
+
+
+Part 2: Inheritance Practice Tasks 
+
+Task 1: Single Level – Animal 
+
+
+class Animal:
+    def make_sound(self):
+        print("Some sound")
+
+class Dog(Animal):  # Inheriting Animal
+    def make_sound(self):  # Overriding Parent Method
+        print("Bark!")
+
+Task 2: Single Level – Vehicle
+
+
+class Vehicle:
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+
+class Car(Vehicle):
+    def __init__(self, brand, model, seats):
+        super().__init__(brand, model)
+        self.seats = seats
+
+    def show(self):
+        print(self.brand, self.model, self.seats)
+
+
+Task 3: Multi-Level – Family Tree
+
+
+class GrandParent:
+    def family_name(self):
+        print("Khan")
+
+class Parent(GrandParent):
+    def occupation(self):
+        print("Teacher")
+
+class Child(Parent):
+    def hobby(self):
+        print("Painting")
+
+
+Task 4: Multiple Inheritance – Skills 
+
+
+class Father:
+    def skill(self):
+        return "Scientist"
+
+class Mother:
+    def skill(self):
+        return "Freelancer"
+
+class Child(Father, Mother):
+    def skill(self):
+        return Father.skill(self) + " and " + Mother.skill(self)
+
