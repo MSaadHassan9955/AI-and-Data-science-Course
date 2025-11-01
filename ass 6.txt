@@ -1,0 +1,186 @@
+# SAYLANI NUMPY FUNDAMENTALS ASSIGNMENT
+
+import numpy as np
+
+# -----------------------------------------------------
+# PART 1: Power of NumPy vs Python Lists
+# -----------------------------------------------------
+
+# Create list of numbers
+python_list = list(range(100000))
+# Multiply each element by 5
+python_result = [x * 5 for x in python_list]
+print("Python list multiplication done")
+
+# Create NumPy array of numbers
+numpy_array = np.arange(100000)
+# Multiply each element by 5
+numpy_result = numpy_array * 5
+print("NumPy array multiplication done (faster than list)")
+
+# NumPy is faster because it uses C language in back end.
+
+
+# -----------------------------------------------------
+# PART 2: Array Creation and Data Types
+# -----------------------------------------------------
+
+# 1D array from 1 to 10
+arr1 = np.arange(1, 11)
+print("\n1D Array:", arr1)
+
+# 2D array of size 3x3 with numbers 1–9
+arr2 = np.arange(1, 10)    
+arr2 = arr2.reshape(3, 3)  
+print("\n2D Array:\n", arr2)
+
+# Display array information
+print("\nArray 1 Details:")
+print("Dimension:", arr1.ndim)
+print("Shape:", arr1.shape)
+print("Size:", arr1.size)
+print("Data type:", arr1.dtype)
+print("Item size:", arr1.itemsize)
+
+print("\nArray 2 Details:")
+print("Dimension:", arr2.ndim)
+print("Shape:", arr2.shape)
+print("Size:", arr2.size)
+print("Data type:", arr2.dtype)
+print("Item size:", arr2.itemsize)
+
+# Create 3x3 float array and convert to int
+float_arr = np.array([[1.1, 2.2, 3.3],
+                      [4.4, 5.5, 6.6],
+                      [7.7, 8.8, 9.9]])
+int_arr = float_arr.astype(int)
+print("\nFloat array converted to integer:\n", int_arr)
+
+
+# -----------------------------------------------------
+# PART 3: Array Creation Functions
+# -----------------------------------------------------
+
+zero_matrix = np.zeros((4, 4))  
+one_matrix = np.ones((3, 2))    
+identity_matrix = np.eye(5)     
+constant_matrix = np.full((3, 3), 7)  # constant 7
+random_int_matrix = np.random.randint(10, 99, (3, 4))  
+
+print("\nZero Matrix:\n", zero_matrix)
+print("\nOne Matrix:\n", one_matrix)
+print("\nIdentity Matrix:\n", identity_matrix)
+print("\nConstant Matrix:\n", constant_matrix)
+print("\nRandom Integer Matrix:\n", random_int_matrix)
+
+# Create array using arange and reshape it
+arr = np.arange(5, 50, 5)   
+arr = arr.reshape(3, 3)     
+print("\nArray from 5 to 50 with step 5 reshaped to 3x3:\n", arr)
+
+
+# -----------------------------------------------------
+# PART 4: Indexing and Slicing
+# -----------------------------------------------------
+
+arr = np.array([[10, 20, 30, 40],
+                [50, 60, 70, 80],
+                [90, 100, 110, 120]])
+
+# Extract second row
+print("\nSecond Row:", arr[1])
+
+# Extract first two rows and last two columns
+print("\nFirst 2 rows & last 2 columns:\n", arr[:2, 2:])
+
+# Extract last column
+print("\nLast Column:", arr[:, -1])
+
+# Replace middle row
+arr[1] = [1, 2, 3, 4]
+print("\nAfter replacing middle row:\n", arr)
+
+
+# -----------------------------------------------------
+# PART 5: Vectorization
+# -----------------------------------------------------
+
+# Create two arrays
+A = np.random.randint(1, 10, 5)
+B = np.random.randint(1, 10, 5)
+print("\nArray A:", A)
+print("Array B:", B)
+
+# Element-wise operations
+print("Addition:", A + B)
+print("Subtraction:", A - B)
+print("Multiplication:", A * B)
+print("Division:", A / B)
+
+# Math functions
+print("\nSquare root:", np.sqrt(A))
+print("Exponential:", np.exp(A))
+print("Sine:", np.sin(A))
+
+# Celsius to Fahrenheit conversion
+celsius = np.array([0, 10, 20, 30, 40, 50, 60, 70, 80, 90])
+fahrenheit = (celsius * 9/5) + 32
+print("\nCelsius:", celsius)
+print("Fahrenheit:", fahrenheit)
+
+
+# -----------------------------------------------------
+# PART 6: Broadcasting
+# -----------------------------------------------------
+
+A = np.array([[1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9]])
+
+print("\nOriginal Matrix A:\n", A)
+
+# Add 10 to all elements
+print("\nA + 10:\n", A + 10)
+
+# Add row vector
+row_vec = np.array([1, 2, 3])
+print("\nA + Row Vector [1,2,3]:\n", A + row_vec)
+
+# Add column vector
+col_vec = np.array([[1], [2], [3]])
+print("\nA + Column Vector [[1],[2],[3]]:\n", A + col_vec)
+
+
+# -----------------------------------------------------
+# PART 7: Reshape, Flatten, Ravel
+# -----------------------------------------------------
+
+arr = np.arange(1, 13)    
+arr_3x4 = arr.reshape(3, 4)  
+arr_2x6 = arr.reshape(2, 6)  
+print("\nArray reshaped to 3x4:\n", arr_3x4)
+print("\nArray reshaped to 2x6:\n", arr_2x6)
+
+# Flatten vs Ravel
+flat = arr_3x4.flatten()  # makes a copy
+ravelled = arr_3x4.ravel()  # makes a view
+print("\nFlattened Array:", flat)
+print("Ravelled Array:", ravelled)
+
+# Change ravelled value
+ravelled[0] = 99
+print("\nAfter changing ravelled array:\n", arr_3x4)
+print("Flattened array does not affect original.")
+
+# Convert 3x3 array to 1D
+arr = np.arange(1, 10)     
+arr = arr.reshape(3, 3)    
+flat1 = arr.flatten()
+ravel1 = arr.ravel()
+print("\nFlattened 1D:", flat1)
+print("Ravelled 1D:", ravel1)
+
+# Modify ravelled
+ravel1[0] = 100
+print("\nAfter changing ravelled, original array changes:\n", arr)
+print("Flattened array remains same.")
