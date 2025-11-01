@@ -1,4 +1,4 @@
-# SAYLANI NUMPY FUNDAMENTALS ASSIGNMENT
+# ASSIGNMENT 6:
 
 import numpy as np
 
@@ -184,3 +184,4 @@ print("Ravelled 1D:", ravel1)
 ravel1[0] = 100
 print("\nAfter changing ravelled, original array changes:\n", arr)
 print("Flattened array remains same.")
+
