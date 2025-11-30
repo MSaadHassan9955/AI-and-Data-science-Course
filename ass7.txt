@@ -1,0 +1,105 @@
+Q1. Which dataset have you selected for your project?
+
+I have selected the Toyota Cars Dataset, which contains listings of different Toyota models along with 
+their key specifications.
+
+Q2. Briefly describe the contents and purpose of your dataset.
+
+
+The dataset includes details about various Toyota vehicles. It has fields such as model, year, price, 
+mileage, fuel type, transmission, tax, miles per gallon and engine size.
+
+The purpose of the dataset is to understand trends in the used car market. It helps show how factors 
+like year, mileage and engine size affect price. It can also highlight which models are more common, 
+how fuel types vary across listings and how car features have changed over time.
+
+Q3. What type of data analysis do you plan to perform using this dataset?
+
+
+I plan to perform data cleaning, exploratory data analysis and visualization using Pandas and Matplotlib.
+
+
+
+##CODE
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+df = pd.read_csv("toyota.csv")
+
+print(df.head())
+print(df.shape)
+print(df.info())
+print(df.describe())
+
+
+# CLEAN MISSING VALUES
+
+print("Missing:\n", df.isnull().sum())
+
+df = df.dropna()
+df = df.drop_duplicates()
+
+print("Cleaned shape:", df.shape)
+
+
+# FEATURE ENGINEERING
+
+
+# . Car age
+df["car_age"] = 2025 - df["year"]
+
+# . Price per mile
+df["price_per_mile"] = df["price"] / df["mileage"].replace(0, pd.NA)
+
+# . Mileage per year
+df["mileage_per_year"] = df["mileage"] / df["car_age"]
+
+# . Price rank
+df = df.sort_values("price")
+df["price_rank"] = range(1, len(df) + 1)
+
+# . Group average price by model 
+avg_price_by_model = df.groupby("model")["price"].mean()
+
+# . Engine category counts
+engine_counts = df["engine_category"].value_counts()
+
+print("\nAverage price by model:\n", avg_price_by_model)
+print("\nEngine category counts:\n", engine_counts)
+
+
+# VISUALIZATIONS
+
+
+# Car age distribution
+plt.figure(figsize=(8, 5))
+plt.hist(df["car_age"], bins=20)
+plt.xlabel("Car Age")
+plt.ylabel("Frequency")
+plt.title("Car Age Distribution")
+plt.show()
+
+# Price distribution
+plt.figure(figsize=(8, 5))
+plt.hist(df["price"], bins=30)
+plt.xlabel("Price")
+plt.ylabel("Frequency")
+plt.title("Price Distribution")
+plt.show()
+
+# Engine category bar chart
+df["engine_category"].value_counts().plot(kind="bar")
+plt.xlabel("Engine Category")
+plt.ylabel("Count")
+plt.title("Engine Category Count")
+plt.show()
+
+# Mileage band bar chart
+df["mileage_band"].value_counts().plot(kind="bar")
+plt.xlabel("Mileage Band")
+plt.ylabel("Count")
+plt.title("Mileage Band Distribution")
+plt.show()
